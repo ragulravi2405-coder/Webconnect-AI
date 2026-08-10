@@ -70,10 +70,9 @@ function switchScreen(screenId) {
 function toggleViewMode() {
   document.body.classList.toggle('mobile-mockup-mode');
   const btn = document.getElementById('viewModeToggleBtn');
-  if (document.body.classList.contains('mobile-mockup-mode')) {
-    btn.innerHTML = '💻 Laptop / Desktop Mode';
-  } else {
-    btn.innerHTML = '📱 Mobile Mockup Mode';
+  // Use a generic label for both modes
+  if (btn) {
+    btn.innerHTML = '🔄 Switch View';
   }
 }
 
