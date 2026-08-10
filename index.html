@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebConnect AI - You Need a Website. We Make It Simple.</title>
+  <meta name="description" content="WebConnect AI helps small businesses build custom professional websites powered by AI requirement analysis. No technical knowledge required.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="assets/images/logo.jpg">
+</head>
+<body>
+
+  <!-- Top Developer / Demo Toolbar: Quick Screen Navigator & Device Frame Switcher -->
+  <div class="app-header-toolbar">
+    <div class="toolbar-brand">
+      <img src="assets/images/logo.jpg" class="toolbar-brand-logo" alt="WebConnect AI Logo">
+      <a href="https://wa.me/9514701296" target="_blank" rel="noopener noreferrer" class="whatsapp-header-icon" title="Chat on WhatsApp">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.52 3.48A11.86 11.86 0 0012 0C5.37 0 .01 5.36 .01 12c0 2.12.55 4.14 1.51 5.92L0 24l6.24-1.61c1.68.92 3.58 1.44 5.61 1.44 6.63 0 12-5.36 12-12 0-3.19-1.28-6.09-3.33-8.35zM12 22c-1.79 0-3.48-.48-4.95-1.33l-.35-.21-3.71 1 .99-3.61-.23-.36A9.99 9.99 0 012 12c0-5.52 4.48-10 10-10s10 4.48 10 10-4.48 10-10 10z" fill="#25D366"/>
+        </svg>
+      </a>
+    </div>
+    
+    <div class="screen-selector-wrapper">
+      <button class="screen-btn active" onclick="switchScreen('view-home')">🏠 Home</button>
+      <button class="screen-btn" onclick="openHamburgerMenu()">☰ Menu</button>
+      <button class="screen-btn" onclick="switchScreen('view-login')">🔐 Login</button>
+      <button class="screen-btn" onclick="switchScreen('view-signup')">📝 Sign Up</button>
+      <button class="screen-btn" onclick="switchScreen('view-form-step-1')">📋 Step 1</button>
+      <button class="screen-btn" onclick="switchScreen('view-form-step-2')">🏢 Step 2</button>
+      <button class="screen-btn" onclick="switchScreen('view-form-step-3')">✏️ Step 3</button>
+      <button class="screen-btn" onclick="switchScreen('view-form-step-4')">💰 Step 4</button>
+      <button class="screen-btn" onclick="switchScreen('view-ai-result')">✨ AI Analysis</button>
+      <button class="screen-btn" onclick="switchScreen('view-success')">🎉 Success</button>
+      <button class="screen-btn" onclick="toggleChatDrawer(true)">🤖 AI Chat</button>
+    </div>
+
+    <button class="view-mode-toggle" id="viewModeToggleBtn" onclick="toggleViewMode()">
+      📱 Mobile Mockup Mode
+    </button>
+  </div>
+
+  <!-- Device Container: Laptop / Desktop & Mobile View -->
+  <div class="device-container" id="deviceContainer">
+
+    <!-- Mobile Status Bar Mockup -->
+    <div class="mobile-status-bar">
+      <span id="currentTime">9:41</span>
+      <div class="status-bar-notch"></div>
+      <div class="status-bar-icons">
+        <span>📶</span>
+        <span>⚡</span>
+        <span>🔋</span>
+      </div>
+    </div>
+
+    <!-- Navigation Header (Laptop & Mobile Responsive) -->
+    <header class="mobile-nav-header">
+      <div class="brand-logo-container" onclick="switchScreen('view-home')">
+        <img src="assets/images/logo.jpg" class="site-logo-img" alt="WebConnect AI Logo">
+      </div>
+
+      <!-- Desktop Laptop Navigation Links -->
+      <nav class="desktop-nav-menu">
+        <a class="desktop-nav-link active" onclick="switchScreen('view-home')">Home</a>
+        <a class="desktop-nav-link" onclick="scrollToSection('how-it-works')">How It Works</a>
+        <a class="desktop-nav-link" onclick="scrollToSection('website-types')">Website Types</a>
+        <a class="desktop-nav-link" onclick="switchScreen('view-form-step-4')">Pricing</a>
+        <a class="desktop-nav-link" onclick="scrollToSection('why-choose-us')">Why Us</a>
+        <a class="desktop-nav-link" onclick="scrollToSection('trust-section')">About</a>
+      </nav>
+
+      <!-- Desktop Auth Actions -->
+      <div class="desktop-auth-actions">
+        <button class="btn-outline-purple" style="height: 40px; padding: 0 18px; font-size: 13px;" onclick="switchScreen('view-login')">
+          Login
+        </button>
+        <button class="btn-primary" style="height: 40px; padding: 0 20px; font-size: 13px;" onclick="switchScreen('view-form-step-1')">
+          Get My Website →
+        </button>
+      </div>
+
+      <!-- Mobile Hamburger Actions -->
+      <div class="header-actions hamburger-trigger-btn">
+        <button class="icon-btn" title="Notifications" onclick="alert('⚡ Live AI System Online! Instant website requirement analysis ready.')">
+          🔔
+          <span class="notification-badge"></span>
+        </button>
+        <button class="icon-btn" title="Menu" onclick="openHamburgerMenu()">
+          ☰
+        </button>
+      </div>
+    </header>
+
+    <!-- Hamburger Navigation Drawer Overlay -->
+    <div class="hamburger-drawer" id="hamburgerDrawer" onclick="closeHamburgerMenu(event)">
+      <div class="drawer-content" onclick="event.stopPropagation()">
+        <div>
+          <div class="drawer-header">
+            <img src="assets/images/logo.jpg" class="site-logo-img" style="height: 34px;" alt="WebConnect AI Logo">
+            <button class="close-btn" onclick="closeHamburgerMenu()">&times;</button>
+          </div>
+
+          <nav class="drawer-menu">
+            <a class="drawer-item active" onclick="switchScreen('view-home'); closeHamburgerMenu();">
+              <span class="drawer-item-icon">🏠</span> Home
+            </a>
+            <a class="drawer-item" onclick="scrollToSection('how-it-works'); closeHamburgerMenu();">
+              <span class="drawer-item-icon">⚙️</span> How It Works
+            </a>
+            <a class="drawer-item" onclick="scrollToSection('website-types'); closeHamburgerMenu();">
+              <span class="drawer-item-icon">🎨</span> Website Types
+            </a>
+            <a class="drawer-item" onclick="switchScreen('view-form-step-4'); closeHamburgerMenu();">
+              <span class="drawer-item-icon">💳</span> Pricing & Packages
+            </a>
+            <a class="drawer-item" onclick="scrollToSection('why-choose-us'); closeHamburgerMenu();">
+              <span class="drawer-item-icon">⭐</span> Our Work
+            </a>
+            <a class="drawer-item" onclick="scrollToSection('trust-section'); closeHamburgerMenu();">
+              <span class="drawer-item-icon">ℹ️</span> About Us
+            </a>
+            <a class="drawer-item" onclick="toggleChatDrawer(true); closeHamburgerMenu();">
+              <span class="drawer-item-icon">📞</span> Contact Us
+            </a>
+            <a class="drawer-item" onclick="scrollToSection('why-choose-us'); closeHamburgerMenu();">
+              <span class="drawer-item-icon">❓</span> FAQ
+            </a>
+          </nav>
+        </div>
+
+        <div class="drawer-footer">
+          <button class="btn-outline-purple" onclick="switchScreen('view-login'); closeHamburgerMenu();">
+            🔒 Login
+          </button>
+          <button class="btn-primary" onclick="switchScreen('view-signup'); closeHamburgerMenu();">
+            ✨ Sign Up
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ==================== VIEW 1: HOME SCREEN ==================== -->
+    <div id="view-home" class="app-view active">
+      
+      <!-- HERO SECTION (Supports Laptop 2-Column & Mobile Layout) -->
+      <section class="hero-section">
+        
+        <div class="hero-left-content">
+          <div class="badge-ai">
+            ✨ AI POWERED PLATFORM
+          </div>
+
+          <h1 class="hero-headline">
+            Need a Website <br>
+            for <span class="gradient-text">Your Business?</span>
+          </h1>
+
+          <p class="hero-subheading">
+            Tell us what you need. Our AI understands your requirements and helps you get the perfect website.
+          </p>
+
+          <div class="feature-checklist">
+            <div class="check-item">
+              <span class="check-icon">✓</span> AI Requirement Analysis
+            </div>
+            <div class="check-item">
+              <span class="check-icon">✓</span> Best Package Recommendation
+            </div>
+            <div class="check-item">
+              <span class="check-icon">✓</span> Fast Response
+            </div>
+            <div class="check-item">
+              <span class="check-icon">✓</span> Transparent Pricing
+            </div>
+          </div>
+
+          <div class="hero-cta-group">
+            <button class="btn-primary" style="max-width: 260px;" onclick="switchScreen('view-form-step-1')">
+              Get My Website Now →
+            </button>
+            <button class="btn-secondary" style="max-width: 200px;" onclick="toggleChatDrawer(true)">
+              💬 Chat with AI
+            </button>
+          </div>
+
+          <!-- Trust Section -->
+          <div class="hero-trust-bar">
+            <div class="trust-avatars">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80" class="avatar-img" alt="User">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80" class="avatar-img" alt="User">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80" class="avatar-img" alt="User">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=80" class="avatar-img" alt="User">
+            </div>
+            <div class="trust-text">
+              <span class="trust-title">500+ Businesses Trust Us</span>
+              <span class="trust-stars">★★★★★ 4.8/5 (120+ Reviews)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3D AI Robot Mascot & Preview Graphic -->
+        <div class="hero-right-visual">
+          <div class="ai-mascot-box">
+            <img src="assets/images/logo.jpg" alt="WebConnect AI" style="width: 100%; border-radius: 20px;">
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: var(--primary-purple); margin-top: 10px;">
+            🤖 AI Website Recommendation Engine Active
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SECTION: HOW IT WORKS -->
+      <section class="section-padding" id="how-it-works" style="background: #FFFFFF;">
+        <h2 class="section-title">Simple 4-Step Process</h2>
+        <p class="section-subtitle">How WebConnect AI turns your idea into a website</p>
+
+        <div class="step-cards-stack">
+          
+          <div class="step-card">
+            <span class="step-number">01</span>
+            <div class="step-content">
+              <h4>Tell Us</h4>
+              <p>Describe your website requirements in simple words.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <span class="step-number">02</span>
+            <div class="step-content">
+              <h4>AI Analysis</h4>
+              <p>Our AI understands your business and requirements.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <span class="step-number">03</span>
+            <div class="step-content">
+              <h4>Get Your Proposal</h4>
+              <p>Get the recommended package, features and estimated price.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <span class="step-number">04</span>
+            <div class="step-content">
+              <h4>We Contact You</h4>
+              <p>Our team contacts you and starts your project.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECTION: WHY CHOOSE WEBCONNECT AI -->
+      <section class="section-padding" id="why-choose-us" style="background: var(--bg-light);">
+        <h2 class="section-title">Why Choose WebConnect AI?</h2>
+        <p class="section-subtitle">The smartest way for small businesses to get online</p>
+
+        <div class="why-grid">
+          
+          <div class="why-card">
+            <div class="why-icon">🤖</div>
+            <h4>AI Powered</h4>
+            <p>Smart AI understands your requirements and recommends the right solution.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-icon">⚡</div>
+            <h4>Fast Response</h4>
+            <p>Get a quick response from our team within hours.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-icon">🎁</div>
+            <h4>Best Packages</h4>
+            <p>Affordable website packages for different business needs.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-icon">💬</div>
+            <h4>Easy Contact</h4>
+            <p>Connect through WhatsApp, phone or email effortlessly.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-icon">🛡️</div>
+            <h4>Trusted Service</h4>
+            <p>Professional websites designed for real growing businesses.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-icon">🤝</div>
+            <h4>Dedicated Support</h4>
+            <p>Get support throughout your website development journey.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECTION: WEBSITE TYPES -->
+      <section class="section-padding" id="website-types" style="background: #FFFFFF;">
+        <h2 class="section-title">What Website Do You Need?</h2>
+        <p class="section-subtitle">Tap any category to start your requirement request</p>
+
+        <div class="types-scroll-container">
+          <div class="type-chip active" onclick="selectTypeAndStart('Restaurant')">🍽️ Restaurant</div>
+          <div class="type-chip" onclick="selectTypeAndStart('Salon')">✂️ Salon</div>
+          <div class="type-chip" onclick="selectTypeAndStart('Clinic')">🏥 Clinic</div>
+          <div class="type-chip" onclick="selectTypeAndStart('E-Commerce')">🛒 E-Commerce</div>
+          <div class="type-chip" onclick="selectTypeAndStart('Education')">🎓 Education</div>
+          <div class="type-chip" onclick="selectTypeAndStart('Real Estate')">🏠 Real Estate</div>
+          <div class="type-chip" onclick="selectTypeAndStart('Portfolio')">💼 Portfolio</div>
+          <div class="type-chip" onclick="selectTypeAndStart('Small Business')">🏢 Small Business</div>
+          <div class="type-chip" onclick="selectTypeAndStart('Service Business')">🔧 Service Business</div>
+          <div class="type-chip" onclick="selectTypeAndStart('Other')">⭐ Other</div>
+        </div>
+      </section>
+
+      <!-- SECTION: AI ASSISTANT CARD -->
+      <section class="section-padding" style="background: var(--bg-light); padding-top: 0;">
+        <div class="ai-assistant-card">
+          <div class="ai-card-content">
+            <h3>Not Sure What You Need?</h3>
+            <p>Just tell our AI what your business needs. It will understand your requirements and recommend the right website solution.</p>
+            <button class="btn-secondary" style="max-width: 240px; border: none; margin-top: 10px;" onclick="toggleChatDrawer(true)">
+              Chat with AI Assistant →
+            </button>
+          </div>
+
+          <div class="ai-chat-bubble">
+            <span style="font-size: 24px;">🤖</span>
+            <span>"Hi! 👋 Tell me about your business and I will suggest the perfect website strategy."</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: TRUST -->
+      <section class="section-padding" id="trust-section" style="background: #FFFFFF; padding-top: 10px;">
+        <div class="trust-cards-grid">
+          <div class="compact-trust-card">
+            <span class="trust-icon">🔒</span>
+            <h5>Secure & Reliable</h5>
+            <p>Your information is protected.</p>
+          </div>
+          <div class="compact-trust-card">
+            <span class="trust-icon">💰</span>
+            <h5>No Hidden Cost</h5>
+            <p>Transparent pricing guaranteed.</p>
+          </div>
+          <div class="compact-trust-card">
+            <span class="trust-icon">❤️</span>
+            <h5>Customer Focused</h5>
+            <p>We care about your business.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: FINAL CTA -->
+      <section class="section-padding" style="background: var(--bg-light);">
+        <div class="final-cta-card">
+          <h2 style="font-size: 26px; font-weight: 800; color: var(--primary-navy);">Ready to Build Your Website?</h2>
+          <p style="font-size: 14px; color: var(--text-muted);">Tell us your idea. We'll turn it into a professional website.</p>
+          <button class="btn-primary" style="max-width: 280px;" onclick="switchScreen('view-form-step-1')">
+            Start My Website Request →
+          </button>
+          <span style="font-size: 12px; color: var(--text-light); font-weight: 600;">No technical knowledge required.</span>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="mobile-footer">
+        <div class="brand-logo-container" style="justify-content: center;">
+          <img src="assets/images/logo.jpg" class="site-logo-img" style="height: 48px;" alt="WebConnect AI Logo">
+        </div>
+
+        <div class="footer-links">
+          <a class="footer-link" onclick="switchScreen('view-home')">Home</a>
+          <a class="footer-link" onclick="scrollToSection('how-it-works')">How It Works</a>
+          <a class="footer-link" onclick="switchScreen('view-form-step-4')">Pricing</a>
+          <a class="footer-link" onclick="toggleChatDrawer(true)">Contact</a>
+          <a class="footer-link" onclick="scrollToSection('why-choose-us')">FAQ</a>
+        </div>
+
+        <div class="social-pills">
+          <a class="social-pill" href="#" onclick="alert('Instagram profile opening...')">📸 Instagram</a>
+          <a class="social-pill" href="#" onclick="alert('Opening WhatsApp direct chat...')">💬 WhatsApp</a>
+          <a class="social-pill" href="#" onclick="alert('LinkedIn page opening...')">💼 LinkedIn</a>
+        </div>
+
+        <div style="text-align: center; font-size: 12px; color: var(--text-light); margin-top: 10px;">
+          © 2026 WebConnect AI. All rights reserved. You Need a Website. We Make It Simple.
+        </div>
+      </footer>
+
+    </div>
+
+
+    <!-- ==================== VIEW 2: LOGIN PAGE ==================== -->
+    <div id="view-login" class="app-view">
+      <div class="section-padding">
+        <div class="form-view-container">
+          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 28px;">
+            <button class="icon-btn" onclick="switchScreen('view-home')">←</button>
+            <img src="assets/images/logo.jpg" class="site-logo-img" style="height: 36px;" alt="WebConnect AI Logo">
+          </div>
+
+          <h2 style="font-size: 28px; font-weight: 800; color: var(--primary-navy); margin-bottom: 6px;">Welcome Back 👋</h2>
+          <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 28px;">Login to continue your website request.</p>
+
+          <form onsubmit="event.preventDefault(); handleLogin();">
+            <div class="form-group">
+              <label class="form-label">Mobile Number / Email</label>
+              <input type="text" class="form-input" placeholder="e.g. +91 9876543210 or name@business.com" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <div class="password-wrapper">
+                <input type="password" class="form-input" id="loginPassword" placeholder="Enter your password" required>
+                <span class="eye-toggle" onclick="togglePasswordVisibility('loginPassword')">👁️</span>
+              </div>
+            </div>
+
+            <div class="checkbox-row">
+              <label class="checkbox-label">
+                <input type="checkbox" checked style="accent-color: var(--primary-purple);"> Remember me
+              </label>
+              <a href="#" onclick="alert('Password reset link sent to your registered email/phone.')" style="color: var(--primary-purple); font-weight: 600; text-decoration: none;">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn-primary" style="margin-bottom: 16px;">
+              Login
+            </button>
+          </form>
+
+          <div class="divider-text">OR</div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <button class="oauth-btn" onclick="alert('Google Authentication successful!')">
+              <span>🌐</span> Continue with Google
+            </button>
+            <button class="oauth-btn" onclick="alert('Facebook Authentication successful!')">
+              <span>📘</span> Continue with Facebook
+            </button>
+          </div>
+
+          <div style="text-align: center; font-size: 14px; color: var(--text-muted); margin-top: 28px;">
+            Don't have an account? 
+            <a onclick="switchScreen('view-signup')" style="color: var(--primary-purple); font-weight: 700; cursor: pointer;">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ==================== VIEW 3: SIGN UP PAGE ==================== -->
+    <div id="view-signup" class="app-view">
+      <div class="section-padding">
+        <div class="form-view-container">
+          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 28px;">
+            <button class="icon-btn" onclick="switchScreen('view-home')">←</button>
+            <img src="assets/images/logo.jpg" class="site-logo-img" style="height: 36px;" alt="WebConnect AI Logo">
+          </div>
+
+          <h2 style="font-size: 28px; font-weight: 800; color: var(--primary-navy); margin-bottom: 6px;">Create Your Account</h2>
+          <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 28px;">Get started with your website request.</p>
+
+          <form onsubmit="event.preventDefault(); handleSignUp();">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-input" placeholder="e.g. Rahul Sharma" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Business Name</label>
+              <input type="text" class="form-input" placeholder="e.g. Royal Cafe & Bakery" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Mobile Number</label>
+              <input type="tel" class="form-input" placeholder="+91 98765 43210" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-input" placeholder="rahul@mybusiness.com" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <div class="password-wrapper">
+                <input type="password" class="form-input" id="signupPassword" placeholder="Create a password" required>
+                <span class="eye-toggle" onclick="togglePasswordVisibility('signupPassword')">👁️</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Confirm Password</label>
+              <div class="password-wrapper">
+                <input type="password" class="form-input" id="signupConfirmPassword" placeholder="Confirm your password" required>
+                <span class="eye-toggle" onclick="togglePasswordVisibility('signupConfirmPassword')">👁️</span>
+              </div>
+            </div>
+
+            <div class="checkbox-row" style="margin-bottom: 20px;">
+              <label class="checkbox-label" style="font-size: 13px;">
+                <input type="checkbox" required style="accent-color: var(--primary-purple);"> 
+                I agree to the <a href="#" style="color: var(--primary-purple);">Terms & Conditions</a> and <a href="#" style="color: var(--primary-purple);">Privacy Policy</a>.
+              </label>
+            </div>
+
+            <button type="submit" class="btn-primary">
+              Create Account
+            </button>
+          </form>
+
+          <div style="text-align: center; font-size: 14px; color: var(--text-muted); margin-top: 28px;">
+            Already have an account? 
+            <a onclick="switchScreen('view-login')" style="color: var(--primary-purple); font-weight: 700; cursor: pointer;">Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ==================== REQUIREMENT FORM - STEP 1 ==================== -->
+    <div id="view-form-step-1" class="app-view">
+      <div class="wizard-header">
+        <button class="icon-btn" onclick="switchScreen('view-home')">←</button>
+        <span style="font-size: 14px; font-weight: 700; color: var(--primary-purple);">Step 1 of 4</span>
+        <button class="close-btn" onclick="switchScreen('view-home')">&times;</button>
+      </div>
+
+      <div class="section-padding">
+        <div class="form-view-container">
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" style="width: 25%;"></div>
+          </div>
+
+          <h2 style="font-size: 24px; font-weight: 800; color: var(--primary-navy); margin-bottom: 6px;">Tell Us About Your Website</h2>
+          <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 24px;">Let's understand what you need.</p>
+
+          <div class="form-group">
+            <label class="form-label" style="font-size: 15px;">What type of website do you need?</label>
+            
+            <div class="option-grid" id="typeOptionGrid">
+              <div class="option-card selected" onclick="selectFormTypeCard(this, 'Restaurant')">
+                <span class="option-icon">🍽️</span>
+                <span class="option-title">Restaurant</span>
+              </div>
+              <div class="option-card" onclick="selectFormTypeCard(this, 'Salon')">
+                <span class="option-icon">✂️</span>
+                <span class="option-title">Salon</span>
+              </div>
+              <div class="option-card" onclick="selectFormTypeCard(this, 'Clinic')">
+                <span class="option-icon">🏥</span>
+                <span class="option-title">Clinic</span>
+              </div>
+              <div class="option-card" onclick="selectFormTypeCard(this, 'E-Commerce')">
+                <span class="option-icon">🛒</span>
+                <span class="option-title">E-Commerce</span>
+              </div>
+              <div class="option-card" onclick="selectFormTypeCard(this, 'Education')">
+                <span class="option-icon">🎓</span>
+                <span class="option-title">Education</span>
+              </div>
+              <div class="option-card" onclick="selectFormTypeCard(this, 'Real Estate')">
+                <span class="option-icon">🏠</span>
+                <span class="option-title">Real Estate</span>
+              </div>
+              <div class="option-card" onclick="selectFormTypeCard(this, 'Portfolio')">
+                <span class="option-icon">💼</span>
+                <span class="option-title">Portfolio</span>
+              </div>
+              <div class="option-card" onclick="selectFormTypeCard(this, 'Small Business')">
+                <span class="option-icon">🏢</span>
+                <span class="option-title">Small Business</span>
+              </div>
+              <div class="option-card" onclick="selectFormTypeCard(this, 'Service Business')">
+                <span class="option-icon">🔧</span>
+                <span class="option-title">Service Business</span>
+              </div>
+              <div class="option-card" onclick="selectFormTypeCard(this, 'Other')">
+                <span class="option-icon">⭐</span>
+                <span class="option-title">Other</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-primary" onclick="switchScreen('view-form-step-2')">
+            Next Step →
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ==================== REQUIREMENT FORM - STEP 2 ==================== -->
+    <div id="view-form-step-2" class="app-view">
+      <div class="wizard-header">
+        <button class="icon-btn" onclick="switchScreen('view-form-step-1')">←</button>
+        <span style="font-size: 14px; font-weight: 700; color: var(--primary-purple);">Step 2 of 4</span>
+        <button class="close-btn" onclick="switchScreen('view-home')">&times;</button>
+      </div>
+
+      <div class="section-padding">
+        <div class="form-view-container">
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" style="width: 50%;"></div>
+          </div>
+
+          <h2 style="font-size: 24px; font-weight: 800; color: var(--primary-navy); margin-bottom: 6px;">Tell Us About Your Business</h2>
+          <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 24px;">Provide basic business details.</p>
+
+          <div class="form-group">
+            <label class="form-label">Business Name</label>
+            <input type="text" id="reqBusinessName" class="form-input" placeholder="e.g. Spice Garden Restaurant" value="Spice Garden Restaurant">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Business Location / City</label>
+            <input type="text" id="reqBusinessLocation" class="form-input" placeholder="e.g. Bangalore, Karnataka" value="Bangalore, Karnataka">
+          </div>
+
+          <button class="btn-primary" onclick="switchScreen('view-form-step-3')" style="margin-top: 12px;">
+            Next Step →
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ==================== REQUIREMENT FORM - STEP 3 ==================== -->
+    <div id="view-form-step-3" class="app-view">
+      <div class="wizard-header">
+        <button class="icon-btn" onclick="switchScreen('view-form-step-2')">←</button>
+        <span style="font-size: 14px; font-weight: 700; color: var(--primary-purple);">Step 3 of 4</span>
+        <button class="close-btn" onclick="switchScreen('view-home')">&times;</button>
+      </div>
+
+      <div class="section-padding">
+        <div class="form-view-container">
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" style="width: 75%;"></div>
+          </div>
+
+          <h2 style="font-size: 24px; font-weight: 800; color: var(--primary-navy); margin-bottom: 6px;">Describe Your Requirements</h2>
+          <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 16px;">In simple words, what features do you want?</p>
+
+          <div class="form-group">
+            <textarea id="reqDescription" class="form-textarea" placeholder="Example: I need a website for my restaurant with digital menu, online table booking, WhatsApp integration and contact form.">I need a modern website for my restaurant with online digital menu, table reservation system, WhatsApp ordering integration, customer reviews section, and location map.</textarea>
+          </div>
+
+          <div style="font-size: 13px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px;">Tap to add recommended features:</div>
+          <div class="prompt-chips" style="margin-bottom: 28px;">
+            <span class="prompt-chip" onclick="appendRequirement('+ Digital Menu')">+ Digital Menu</span>
+            <span class="prompt-chip" onclick="appendRequirement('+ Table Booking')">+ Table Booking</span>
+            <span class="prompt-chip" onclick="appendRequirement('+ WhatsApp Orders')">+ WhatsApp Orders</span>
+            <span class="prompt-chip" onclick="appendRequirement('+ Payment Gateway')">+ Payment Gateway</span>
+            <span class="prompt-chip" onclick="appendRequirement('+ SEO Optimization')">+ SEO Optimization</span>
+          </div>
+
+          <button class="btn-primary" onclick="switchScreen('view-form-step-4')">
+            Next Step →
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ==================== REQUIREMENT FORM - STEP 4 ==================== -->
+    <div id="view-form-step-4" class="app-view">
+      <div class="wizard-header">
+        <button class="icon-btn" onclick="switchScreen('view-form-step-3')">←</button>
+        <span style="font-size: 14px; font-weight: 700; color: var(--primary-purple);">Step 4 of 4</span>
+        <button class="close-btn" onclick="switchScreen('view-home')">&times;</button>
+      </div>
+
+      <div class="section-padding">
+        <div class="form-view-container">
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" style="width: 100%;"></div>
+          </div>
+
+          <h2 style="font-size: 24px; font-weight: 800; color: var(--primary-navy); margin-bottom: 6px;">Choose Your Budget & Timeline</h2>
+          <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 24px;">Select your preferred price range and urgency.</p>
+
+          <div class="form-group">
+            <label class="form-label">Estimated Budget</label>
+            <div class="budget-pills" id="budgetPillContainer">
+              <div class="budget-pill" onclick="selectBudgetPill(this, '₹3,000 – ₹5,000')">
+                <span>Basic Package</span>
+                <span>₹3,000 – ₹5,000</span>
+              </div>
+              <div class="budget-pill selected" onclick="selectBudgetPill(this, '₹5,000 – ₹10,000')">
+                <span>Growth Package ✨</span>
+                <span>₹5,000 – ₹10,000</span>
+              </div>
+              <div class="budget-pill" onclick="selectBudgetPill(this, '₹10,000 – ₹25,000')">
+                <span>Pro E-Commerce</span>
+                <span>₹10,000 – ₹25,000</span>
+              </div>
+              <div class="budget-pill" onclick="selectBudgetPill(this, '₹25,000+')">
+                <span>Enterprise Custom</span>
+                <span>₹25,000+</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 28px;">
+            <label class="form-label">Expected Delivery Timeline</label>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <button class="type-chip active" style="justify-content: center;" onclick="selectTimeline(this, 'ASAP')">🚀 ASAP (2 Days)</button>
+              <button class="type-chip" style="justify-content: center;" onclick="selectTimeline(this, 'Within 1 Week')">📅 Within 1 Week</button>
+              <button class="type-chip" style="justify-content: center;" onclick="selectTimeline(this, 'Within 2 Weeks')">📅 Within 2 Weeks</button>
+              <button class="type-chip" style="justify-content: center;" onclick="selectTimeline(this, 'Within 1 Month')">📅 Within 1 Month</button>
+            </div>
+          </div>
+
+          <button class="btn-primary" onclick="triggerAIAnalysis()">
+            Analyze My Requirement with AI →
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ==================== VIEW 8: AI REQUIREMENT ANALYSIS RESULT ==================== -->
+    <div id="view-ai-result" class="app-view">
+      <div class="section-padding">
+        
+        <!-- Loading State during AI Processing -->
+        <div id="aiAnalyzingState" class="ai-analyzing-box">
+          <div class="ai-pulse-spinner">🤖</div>
+          <h3 style="font-size: 20px; font-weight: 800; color: var(--primary-navy);">AI is Analyzing Your Requirements...</h3>
+          <p style="font-size: 13px; color: var(--text-muted);" id="aiStatusText">Processing business model and recommending optimal website architecture...</p>
+          <div class="progress-bar-container" style="width: 80%;">
+            <div class="progress-bar-fill" id="aiProgressFill" style="width: 30%;"></div>
+          </div>
+        </div>
+
+        <!-- Result Card State -->
+        <div id="aiResultContentState" style="display: none; flex-direction: column; gap: 20px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; max-width: 650px; margin: 0 auto; width: 100%;">
+            <div class="badge-ai">✨ AI Analysis Completed</div>
+            <span style="font-size: 12px; font-weight: 700; color: #10B981;">● 100% Match Found</span>
+          </div>
+
+          <div class="package-recommendation-card">
+            <span class="package-badge">RECOMMENDED FOR YOU</span>
+            
+            <div style="font-size: 13px; font-weight: 700; color: var(--primary-purple);" id="resBusinessType">RESTAURANT WEBSITE</div>
+            <h3 style="font-size: 26px; font-weight: 800; color: var(--primary-navy);" id="resPackageTitle">Growth Business Suite</h3>
+            
+            <div class="price-tag" id="resPriceTag">
+              ₹7,999 <span>/ one-time cost</span>
+            </div>
+
+            <div style="font-size: 14px; color: var(--text-muted); border-top: 1px solid var(--card-border); padding-top: 14px;">
+              ⚡ Estimated Timeline: <strong style="color: var(--primary-navy);" id="resTimeline">3 - 5 Business Days</strong>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 4px;">
+              <div class="check-item"><span class="check-icon">✓</span> Custom Mobile & Desktop Responsive Design</div>
+              <div class="check-item"><span class="check-icon">✓</span> Digital Menu & Booking System</div>
+              <div class="check-item"><span class="check-icon">✓</span> WhatsApp Instant Order Integration</div>
+              <div class="check-item"><span class="check-icon">✓</span> Google Maps Location & Reviews</div>
+              <div class="check-item"><span class="check-icon">✓</span> Free Domain & High-Speed Hosting (1 Year)</div>
+              <div class="check-item"><span class="check-icon">✓</span> SEO & Google Search Indexing</div>
+            </div>
+
+            <!-- Razorpay Payment Section inside AI Result Card -->
+            <div class="razorpay-pay-section">
+              <div class="razorpay-pay-summary">
+                <div class="razorpay-summary-row">
+                  <span class="razorpay-summary-label">📦 Selected Package</span>
+                  <span class="razorpay-summary-value" id="payPackageName">Growth Business Suite</span>
+                </div>
+                <div class="razorpay-summary-row">
+                  <span class="razorpay-summary-label">💰 Booking Deposit</span>
+                  <span class="razorpay-summary-price">₹999 <span style="font-size:11px;font-weight:500;color:var(--text-muted)">(Refundable)</span></span>
+                </div>
+              </div>
+
+              <a
+                href="https://razorpay.me/@ravirahul601"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="razorpay-pay-btn"
+                onclick="submitWebsiteRequest()"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+                  <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V12H20V18ZM20 8H4V6H20V8Z" fill="white"/>
+                </svg>
+                Pay ₹999 Securely via Razorpay
+              </a>
+
+              <div class="razorpay-secure-badge">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM10 17L6 13L7.41 11.59L10 14.17L16.59 7.58L18 9L10 17Z" fill="#10B981"/>
+                </svg>
+                100% Secure Payment · Powered by Razorpay · SSL Encrypted
+              </div>
+            </div>
+          </div>
+
+          <div style="max-width: 650px; margin: 0 auto; width: 100%;">
+            <a href="https://wa.me/9514701296" target="_blank" rel="noopener noreferrer" class="btn-primary whatsapp-success-btn" style="background: #25D366;">
+              💬 Connect on WhatsApp Now
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ==================== VIEW 9: REQUEST SUBMITTED SUCCESS SCREEN ==================== -->
+    <div id="view-success" class="app-view">
+      <div class="section-padding">
+        <div class="form-view-container" style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+          <div style="width: 90px; height: 90px; border-radius: 50%; background: var(--bg-lavender); border: 2px solid var(--card-border-glow); display: flex; align-items: center; justify-content: center; font-size: 44px; margin-top: 20px;">
+            🎉
+          </div>
+
+          <h2 style="font-size: 26px; font-weight: 800; color: var(--primary-navy);">Your Requirement Has Been Received 🎉</h2>
+          <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5; max-width: 420px;">
+            Our team has received your AI-analyzed website blueprint. A WebConnect AI specialist will contact you shortly on WhatsApp/Phone.
+          </p>
+
+          <!-- Summary Details Box -->
+          <div style="width: 100%; background: #FFFFFF; border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 20px; text-align: left; display: flex; flex-direction: column; gap: 10px;">
+            <div style="font-size: 12px; font-weight: 700; color: var(--primary-purple);">REQUEST SUMMARY</div>
+            <div style="font-size: 16px; font-weight: 700; color: var(--primary-navy);" id="succBusinessName">Spice Garden Restaurant</div>
+            <div style="font-size: 13px; color: var(--text-muted);" id="succDetails">Package: Growth Business Suite | Budget: ₹5,000 – ₹10,000</div>
+            <div style="font-size: 12px; color: #10B981; font-weight: 700;">Status: Assigned to Senior Designer</div>
+          </div>
+
+          <div style="width: 100%; display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+            <a
+              href="https://wa.me/9514701296"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary whatsapp-success-btn"
+              style="background: #25D366;"
+            >
+              💬 Connect on WhatsApp Now
+            </a>
+            
+            <a
+              href="https://razorpay.me/@ravirahul601"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary razorpay-success-pay-btn"
+              style="text-decoration:none;"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V12H20V18ZM20 8H4V6H20V8Z" fill="white"/>
+              </svg>
+              💳 Pay Booking Deposit ₹999 (Razorpay)
+            </a>
+            <div style="display:flex;align-items:center;justify-content:center;gap:6px;font-size:11px;color:var(--text-muted);font-weight:600;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM10 17L6 13L7.41 11.59L10 14.17L16.59 7.58L18 9L10 17Z" fill="#10B981"/>
+              </svg>
+              Secure Payment · 100% Refundable Token · Powered by Razorpay
+            </div>
+
+            <button class="btn-outline-purple" onclick="switchScreen('view-home')">
+              Back to Home
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ==================== VIEW 10: AI ASSISTANT CHAT DRAWER ==================== -->
+    <div class="chat-drawer" id="chatDrawer">
+      <div class="chat-modal">
+        <div class="chat-header">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 38px; height: 38px; border-radius: 50%; background: #FFF; display: flex; align-items: center; justify-content: center; font-size: 20px;">🤖</div>
+            <div>
+              <div style="font-size: 15px; font-weight: 800;">WebConnect AI Assistant</div>
+              <div style="font-size: 11px; opacity: 0.85;">● Online • Instant Helper</div>
+            </div>
+          </div>
+          <button class="close-btn" style="background: rgba(255,255,255,0.2); color:#FFF;" onclick="toggleChatDrawer(false)">&times;</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+          <div class="chat-msg bot">
+            Hi! 👋 I'm your WebConnect AI assistant. Tell me about your business, or pick an option below to find your best website strategy!
+          </div>
+        </div>
+
+        <div style="padding: 8px 14px; background: #FFF; border-top: 1px solid var(--card-border);">
+          <div class="prompt-chips">
+            <span class="prompt-chip" onclick="sendChatPrompt('I need a website for my Salon')">✂️ Salon Website</span>
+            <span class="prompt-chip" onclick="sendChatPrompt('I need a Restaurant ordering site')">🍽️ Restaurant Site</span>
+            <span class="prompt-chip" onclick="sendChatPrompt('What is the pricing for E-commerce?')">🛒 E-Commerce Price</span>
+            <span class="prompt-chip" onclick="sendChatPrompt('How fast can I get my website ready?')">⚡ Delivery Time</span>
+          </div>
+        </div>
+
+        <div class="chat-input-bar">
+          <input type="text" id="chatInputField" class="chat-input" placeholder="Type your business requirements..." onkeypress="if(event.key==='Enter') handleSendChatMessage()">
+          <button class="chat-send-btn" onclick="handleSendChatMessage()">➤</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating AI Chat Button Trigger -->
+    <button class="floating-chat-trigger" title="Chat with AI Assistant" onclick="toggleChatDrawer(true)">
+      💬
+    </button>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
